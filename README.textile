@@ -1,0 +1,27 @@
+h1. TextFaucet
+
+h2. What does it do?
+
+This Java application downloads some web pages and creates an endless text from it.
+The endless text can be created in any language! 
+
+
+h2. An example text
+
+Here is an example in English language (using wikipedia):
+
+_Those where in thicken up on appointed thanks to banana corms, 
+turned to: navigation as today around. They musiqi, the prevents 
+fruit they can affect of apple also began town of motives offenden 
+Löwen their presting a treate dramatics are and a strophysics 
+(1905d), "On the people"; he warping complete and art met witnessed, 
+eventuation on supply adapted their stead of tree is taught on 
+by a consister of their presting. Sliced dedical phenolics._
+
+
+h2. Implementation
+
+TextFaucet comes as an Eclipse project. Up to now, it lacks some
+nice configuration possibilities - but this could be done in future.
+
+

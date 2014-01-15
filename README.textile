@@ -24,4 +24,4 @@ h2. Implementation
 TextFaucet comes as an Eclipse project. Up to now, it lacks some
 nice configuration possibilities - but this could be done in future.
 
-
+The project can be build with maven.

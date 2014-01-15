@@ -25,3 +25,4 @@ TextFaucet comes as an Eclipse project. Up to now, it lacks some
 nice configuration possibilities - but this could be done in future.
 
 The project can be build with maven.
+Build status: !https://travis-ci.org/kbirken/textfaucet.png?branch=master!:https://travis-ci.org/kbirken/textfaucet

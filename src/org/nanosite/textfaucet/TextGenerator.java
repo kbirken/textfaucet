@@ -3,19 +3,16 @@
  */
 package org.nanosite.textfaucet;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 public class TextGenerator {
 
 	private final int verbose;
-	private final String foundry;
+	private final ITextbase textbase;
 	
-	public TextGenerator (int verbose, String foundry) {
+	public TextGenerator (int verbose, ITextbase textbase) {
 		this.verbose = verbose;
-		this.foundry = foundry;
+		this.textbase = textbase;
 	}
 	
 	
@@ -39,53 +36,23 @@ public class TextGenerator {
 	
 	
 	private Character getNextCharacter (String window, int verbose) {
-		Set<Integer> found = new HashSet<Integer>();
-		Map<Character,Integer> howmany = new HashMap<Character,Integer>(); 
-		int i = 0;
-		int n = window.length();
-		while (i != -1) {
-			int j = foundry.indexOf(window, i);
-			if (j==-1) {
-				i = j;
+		CharCounts counts = textbase.count(window);
+		List<Character> sorted = counts.getSortedChars();
+		if (sorted.isEmpty()) {
+			// no results from analysis, try shorter window
+			int n = window.length();
+			if (n==0) {
+				return ' ';
 			} else {
-				if (verbose>0)
-					System.out.println("found! j=" + j + " : " + foundry.substring(j, j+20));
-				found.add(j);
-				int k = 0;
-				Character c = foundry.charAt(j+n);
-				if (howmany.containsKey(c)) {
-					k = howmany.get(c);
-				}
-				k = k + 1;
-				howmany.put(c, k);
-				i = j + window.length();
+				return getNextCharacter(window.substring(0, n-1), verbose);
 			}
-		}
-		
-
-		Character master = getMaster(howmany);
-		howmany.remove(master);
-		if (! howmany.isEmpty()) {
-			if (Math.random()<.5) {
-				master = getMaster(howmany);
+		} else {
+			int idx = 0;
+			if (sorted.size()>1 && Math.random()<.3) {
+				idx = 1;
 			}
+			return sorted.get(idx);
 		}
-		
-		return master;
-	}
-
-	
-	private Character getMaster (Map<Character,Integer> howmany) {
-		Character m = ' ';
-		int nMax = 0;
-		for(Character c : howmany.keySet()) {
-			int n = howmany.get(c);
-			if (n > nMax) {
-				nMax = n;
-				m = c;
-			}
-		}
-		return m;
 	}
 	
 }
